@@ -38,7 +38,7 @@ class PersonDao {
   Future<List<Person>> searchPerson(String searchWord) async {
     var db = await DbConnectionHelper.dbAccess();
     List<Map<String, dynamic>> maps = await db.rawQuery(
-        "select * from persons where person_name like '%$searchWord%'");
+        "select * from persons where person_name like '%$searchWord%' or person_num like %$searchWord%'");
 
     return List.generate(maps.length, (p) {
       var line = maps[p];
@@ -50,7 +50,7 @@ class PersonDao {
     });
   }
 
-  //Kişi güncelleme
+//Kişi güncelleme
   Future<void> personUpdate(
       int personId, String personName, String personLastname, String personNum,
       {String personMail = "", String personCompany = " "}) async {
@@ -71,6 +71,22 @@ class PersonDao {
     var db = await DbConnectionHelper.dbAccess();
     await db.delete("persons", where: "person_id=?", whereArgs: [personId]);
   }
+
+//Kişi Arama
+  Future<Person> getByIdPersonWithId({required int perId}) async {
+    var db = await DbConnectionHelper.dbAccess();
+    List<Map<String, dynamic>> maps =
+        await db.rawQuery("select * from persons where person_id = $perId");
+    return Person(
+        id: maps[0]["person_id"],
+        name: maps[0]["person_name"],
+        lastname: maps[0]["person_lastName"],
+        num: maps[0]["person_num"]);
+  }
+
+/////////
+
+///////////
 
 //Eklenen son kişiyi çekme
   Future<List<Person>> getByIdPerson() async {

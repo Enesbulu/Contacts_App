@@ -26,8 +26,8 @@ class _ContactAddState extends State<ContactAdd> {
     print("Save edildi");
     await PersonDao().addPerson(tfpersonName.text, tfpersonLastname.text,
         tfContactNum.text, tfContactMail.text, tfContactCompany.text);
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ContactInfo()));
+    // Navigator.push(
+    //     context, MaterialPageRoute(builder: (context) => ContactInfo()));
   }
 
   @override

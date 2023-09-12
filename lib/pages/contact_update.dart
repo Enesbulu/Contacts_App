@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:masterapp/pages/homePages.dart';
-import 'package:masterapp/entity/person.dart';
 // import 'package:masterapp_/person.dart';
 
 class ContactUpdate extends StatefulWidget {
-  Person person;
-  ContactUpdate({Key? key, required this.person}) : super(key: key);
+  // Person person;
+  late int personId;
+  ContactUpdate({Key? key, required this.personId}) : super(key: key);
 
   @override
   State<ContactUpdate> createState() => _ContactUpdateState();

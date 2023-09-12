@@ -5,42 +5,36 @@ import 'package:masterapp/pages/homePages.dart';
 import 'package:masterapp/entity/person.dart';
 
 class ContactInfo extends StatefulWidget {
-  // late var personId = person.id;
-  ContactInfo({Key? key}) : super(key: key);
+  late int personId;
+  ContactInfo({Key? key, required this.personId}) : super(key: key);
 
   @override
   State<ContactInfo> createState() => _ContactInfoState();
 }
 
 class _ContactInfoState extends State<ContactInfo> {
-  var tfpersonName = TextEditingController();
-  var tfpersonLastname = TextEditingController();
-  var tfpersonNum = TextEditingController();
-  var tfpersonMail = TextEditingController();
-  var tfpersonCompany = TextEditingController();
-  late Person tfPerson;
+  Person? person_;
 
   // Future<Person> getByPerson() async  {
   //   var getPerson = await  PersonDao().getByIdPerson();
   //   return getPerson;
   // }
   Future<Person> getByPerson() async {
-    List<Person> getPerson = await PersonDao().getByIdPerson();
-
-    print("getByPerson metodunun içerisi :: $getPerson");
+    Person getPerson =
+        await PersonDao().getByIdPersonWithId(perId: widget.personId);
+    print("getByPerson metodunun içerisi :: ${widget.personId}");
     // return getPerson;
-    return Person(
-        id: getPerson[0].id,
-        name: getPerson[0].name,
-        lastname: getPerson[0].lastname,
-        num: getPerson[0].num,
-        mail: getPerson[0].mail,
-        company: getPerson[0].company);
+    return getPerson;
   }
 
   @override
   void initState() {
     super.initState();
+    getByPerson().then((value) {
+      setState(() {
+        person_ = value;
+      });
+    });
     // var person = person.person;
     // tfpersonName.text = person.name;
     // tfpersonLastname.text = person.lastname;
@@ -52,7 +46,6 @@ class _ContactInfoState extends State<ContactInfo> {
   @override
   Widget build(BuildContext context) {
     // Person getcontact = getByPerson() as Person;
-
     print(getByPerson());
     return Scaffold(
       //AppBar Area
@@ -108,7 +101,7 @@ class _ContactInfoState extends State<ContactInfo> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => ContactUpdate(
-                            person: tfPerson,
+                            personId: person_!.id,
                           )),
                 );
               },
@@ -135,25 +128,24 @@ class _ContactInfoState extends State<ContactInfo> {
             ),
             //Name Text Area
             Text(
-              // getcontact.name,
-              // "<Contact Name>",
-              tfpersonName.text,
-
+              person_ != null
+                  ? '${person_!.name} ${person_!.lastname}'
+                  : 'No Name',
               style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 25,
                   // fontFamily: "bold",
                   fontWeight: FontWeight.w600),
             ),
             const Spacer(
-              flex: 50,
+              flex: 30,
             ),
             //Number Area
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "+90 500 000 00 00",
-                  style: TextStyle(color: Colors.cyan, fontSize: 17),
+                  person_ != null ? person_!.num : 'No Number',
+                  style: TextStyle(color: Colors.cyan, fontSize: 20),
                 ),
               ],
             ),
