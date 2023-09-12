@@ -1,8 +1,5 @@
 import 'package:masterapp/dbconnection/dbConnectionHelper.dart';
 import 'package:masterapp/entity/person.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
-import 'package:flutter/widgets.dart';
 
 class PersonDao {
 //Kişileri Listeleme

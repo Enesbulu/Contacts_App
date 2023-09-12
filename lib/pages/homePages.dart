@@ -98,8 +98,11 @@ class _HomeState extends State<Home> {
                 ),
                 onChanged: (searchResult) {
                   print("Arama sonucu : $searchResult");
-                  searchQuery =
-                      searchResult; //arama sonucunu aranan kelimeye aktardım.
+                  setState(() {
+                    //ekranı günceller
+                    searchQuery =
+                        searchResult; //arama sonucunu aranan kelimeye aktardım.
+                  });
                 },
               )
             : const Text('Masters'),
