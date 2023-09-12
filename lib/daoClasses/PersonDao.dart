@@ -12,6 +12,7 @@ class PersonDao {
         await db.rawQuery("Select * from persons");
 
     print("//\\'allPerson' çalışıyor");
+
     return List.generate(maps.length, (p) {
       var line = maps[p];
       return Person(
@@ -37,12 +38,10 @@ class PersonDao {
   }
 
 //Kişi Arama
-  Future<List<Person>> searchPerson(
-    String SearchWord,
-  ) async {
+  Future<List<Person>> searchPerson(String searchWord) async {
     var db = await DbConnectionHelper.dbAccess();
     List<Map<String, dynamic>> maps = await db.rawQuery(
-        "select * from persons where person_name like '%$SearchWord%'");
+        "select * from persons where person_name like '%$searchWord%'");
 
     return List.generate(maps.length, (p) {
       var line = maps[p];
