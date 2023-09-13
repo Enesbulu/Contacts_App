@@ -32,17 +32,10 @@ class _ContactInfoState extends State<ContactInfo> {
         });
       },
     );
-    // var person = person.person;
-    // tfpersonName.text = person.name;
-    // tfpersonLastname.text = person.lastname;
-    // tfpersonNum.text = person.num;
-    // tfpersonMail.text = person.mail;
-    // tfpersonCompany.text = person.company;
   }
 
   @override
   Widget build(BuildContext context) {
-    // Person getcontact = getByPerson() as Person;
     print(getByPerson());
     return Scaffold(
       //AppBar Area
@@ -134,7 +127,7 @@ class _ContactInfoState extends State<ContactInfo> {
                   fontWeight: FontWeight.w600),
             ),
             const Spacer(
-              flex: 30,
+              flex: 20,
             ),
             //Number Area
             Row(
@@ -225,20 +218,27 @@ class _ContactInfoState extends State<ContactInfo> {
             //Divider Line
             const DividerLine(),
             const Spacer(flex: 20),
-            Text(
-              person_ != null ? person_!.mail : '',
-              style: const TextStyle(
-                  fontSize: 25,
-                  // fontFamily: "bold",
-                  fontWeight: FontWeight.w600),
+            Column(
+              children: [
+                Text(
+                  person_ != null ? "Mail: ${person_!.mail}" : '',
+                  style: const TextStyle(
+                      fontSize: 25,
+                      // fontFamily: "bold",
+                      fontWeight: FontWeight.w600),
+                ),
+                const Spacer(flex: 10),
+                Text(
+                  person_ != null ? "Company:  ${person_!.company}" : '',
+                  style: const TextStyle(
+                      fontSize: 20,
+                      // fontFamily: "bold",
+                      fontWeight: FontWeight.w600),
+                ),
+              ],
             ),
-            Text(
-              person_ != null ? person_!.company : '',
-              style: const TextStyle(
-                  fontSize: 25,
-                  // fontFamily: "bold",
-                  fontWeight: FontWeight.w600),
-            ),
+
+            const Spacer(flex: 10),
           ],
         ),
       ),

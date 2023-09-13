@@ -47,6 +47,8 @@ class PersonDao {
         name: line["person_name"],
         lastname: line["person_lastName"],
         num: line["person_num"],
+        mail: line["person_mail"],
+        company: line["person_company"],
       );
     });
   }
@@ -66,22 +68,18 @@ class PersonDao {
     await db.update("persons", personInfo,
         where: "person_id=?", whereArgs: [personId]);
   }
-
-  //Kişi güncelleme - Id le
-  Future<void> personUpdateWithId(
-      int personId, String personName, String personLastname, String personNum,
-      {String personMail = "", String personCompany = " "}) async {
-    var db = await DbConnectionHelper.dbAccess();
-    Map<String, dynamic> personInfo = {};
-    personInfo["person_name"] = personName;
-    personInfo["person_lastName"] = personLastname;
-    personInfo["person_num"] = personNum;
-    personInfo["person_mail"] = personMail;
-    personInfo["person_company"] = personCompany;
-
-    await db.update("persons", personInfo,
-        where: "person_id=?", whereArgs: [personId]);
-  }
+//--Gerek var mı?? kullanımda  değil!
+  // //Kişi güncelleme - Id le
+  // Future<void> personUpdateWithId(
+  //     int personId, String personName, String personLastname, String personNum,
+  //     {String personMail = "", String personCompany = " "}) async {
+  //   var db = await DbConnectionHelper.dbAccess();
+  //   Map<String, dynamic> personInfo = {};
+  //   personInfo["person_name"] = personName;
+  //   personInfo["person_lastName"] = personLastname;
+  //   personInfo["person_num"] = personNum;
+  //   personInfo["person_mail"] = personMail;
+  //   personInfo["person_company"] = personCompany;
 
   //Kişi Sil
   Future<void> personDelete(int personId) async {
@@ -95,10 +93,13 @@ class PersonDao {
     List<Map<String, dynamic>> maps =
         await db.rawQuery("select * from persons where person_id = $perId");
     return Person(
-        id: maps[0]["person_id"],
-        name: maps[0]["person_name"],
-        lastname: maps[0]["person_lastName"],
-        num: maps[0]["person_num"]);
+      id: maps[0]["person_id"],
+      name: maps[0]["person_name"],
+      lastname: maps[0]["person_lastName"],
+      num: maps[0]["person_num"],
+      mail: maps[0]["person_mail"],
+      company: maps[0]["person_company"],
+    );
   }
 
 /////////
@@ -131,10 +132,13 @@ class PersonDao {
     return List.generate(map.length, (p) {
       var line = map[p];
       return Person(
-          id: line["person_id"],
-          name: line["person_name"],
-          lastname: line["person_lastName"],
-          num: line["person_num"]);
+        id: line["person_id"],
+        name: line["person_name"],
+        lastname: line["person_lastName"],
+        num: line["person_num"],
+        mail: line["person_mail"],
+        company: line["person_company"],
+      );
     });
 
     /*  // var line = map;
@@ -153,9 +157,12 @@ class PersonDao {
 
     var line = map[0];
     return Person(
-        id: line["person_id"],
-        name: line["person_name"],
-        lastname: line["person_lastName"],
-        num: line["person_num"]);
+      id: line["person_id"],
+      name: line["person_name"],
+      lastname: line["person_lastName"],
+      num: line["person_num"],
+      mail: line["person_mail"],
+      company: line["person_company"],
+    );
   }
 }
