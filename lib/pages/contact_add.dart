@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:masterapp/daoClasses/PersonDao.dart';
-import 'package:masterapp/pages/contact_info.dart';
 import 'package:masterapp/pages/homePages.dart';
 import 'package:masterapp/entity/person.dart';
 
@@ -62,7 +61,7 @@ class _ContactAddState extends State<ContactAdd> {
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromARGB(255, 101, 172, 200),
+                backgroundColor: const Color.fromARGB(255, 101, 172, 200),
               ),
               onPressed: () {
                 print("save basıldı");

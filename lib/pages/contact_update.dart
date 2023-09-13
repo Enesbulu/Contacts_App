@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:masterapp/daoClasses/PersonDao.dart';
+import 'package:masterapp/entity/person.dart';
 import 'package:masterapp/pages/homePages.dart';
 // import 'package:masterapp_/person.dart';
 
@@ -18,6 +20,8 @@ class _ContactUpdateState extends State<ContactUpdate> {
   var tfContactMail = TextEditingController();
   var tfContactCompany = TextEditingController();
 
+  Person? person_;
+
   Future<void> personUpdate(
       // int personId,
       String tfContactName,
@@ -31,6 +35,30 @@ class _ContactUpdateState extends State<ContactUpdate> {
       MaterialPageRoute(
         builder: (context) => Home(),
       ),
+    );
+  }
+
+  Future<Person> getByPerson() async {
+    Person getPerson =
+        await PersonDao().getByIdPersonWithId(perId: widget.personId);
+    print("getByPerson metodunun içerisi :: ${widget.personId}");
+    return getPerson;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getByPerson().then(
+      (value) {
+        setState(() {
+          tfContactName.text = value.name;
+          tfContactLastName.text = value.lastname;
+          tfContactNum.text = value.num;
+          tfContactMail.text = value.mail;
+          tfContactCompany.text = value.company;
+        });
+      },
     );
   }
 

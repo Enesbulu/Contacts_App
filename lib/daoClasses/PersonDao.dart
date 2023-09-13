@@ -43,15 +43,32 @@ class PersonDao {
     return List.generate(maps.length, (p) {
       var line = maps[p];
       return Person(
-          id: line["person_id"],
-          name: line["person_name"],
-          lastname: line["person_lastName"],
-          num: line["person_num"]);
+        id: line["person_id"],
+        name: line["person_name"],
+        lastname: line["person_lastName"],
+        num: line["person_num"],
+      );
     });
   }
 
 //Kişi güncelleme
   Future<void> personUpdate(
+      int personId, String personName, String personLastname, String personNum,
+      {String personMail = "", String personCompany = " "}) async {
+    var db = await DbConnectionHelper.dbAccess();
+    Map<String, dynamic> personInfo = {};
+    personInfo["person_name"] = personName;
+    personInfo["person_lastName"] = personLastname;
+    personInfo["person_num"] = personNum;
+    personInfo["person_mail"] = personMail;
+    personInfo["person_company"] = personCompany;
+
+    await db.update("persons", personInfo,
+        where: "person_id=?", whereArgs: [personId]);
+  }
+
+  //Kişi güncelleme - Id le
+  Future<void> personUpdateWithId(
       int personId, String personName, String personLastname, String personNum,
       {String personMail = "", String personCompany = " "}) async {
     var db = await DbConnectionHelper.dbAccess();

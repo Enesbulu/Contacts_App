@@ -15,26 +15,23 @@ class ContactInfo extends StatefulWidget {
 class _ContactInfoState extends State<ContactInfo> {
   Person? person_;
 
-  // Future<Person> getByPerson() async  {
-  //   var getPerson = await  PersonDao().getByIdPerson();
-  //   return getPerson;
-  // }
   Future<Person> getByPerson() async {
     Person getPerson =
         await PersonDao().getByIdPersonWithId(perId: widget.personId);
     print("getByPerson metodunun içerisi :: ${widget.personId}");
-    // return getPerson;
     return getPerson;
   }
 
   @override
   void initState() {
     super.initState();
-    getByPerson().then((value) {
-      setState(() {
-        person_ = value;
-      });
-    });
+    getByPerson().then(
+      (value) {
+        setState(() {
+          person_ = value;
+        });
+      },
+    );
     // var person = person.person;
     // tfpersonName.text = person.name;
     // tfpersonLastname.text = person.lastname;
@@ -227,7 +224,21 @@ class _ContactInfoState extends State<ContactInfo> {
             ),
             //Divider Line
             const DividerLine(),
-            const Spacer(flex: 50)
+            const Spacer(flex: 20),
+            Text(
+              person_ != null ? person_!.mail : '',
+              style: const TextStyle(
+                  fontSize: 25,
+                  // fontFamily: "bold",
+                  fontWeight: FontWeight.w600),
+            ),
+            Text(
+              person_ != null ? person_!.company : '',
+              style: const TextStyle(
+                  fontSize: 25,
+                  // fontFamily: "bold",
+                  fontWeight: FontWeight.w600),
+            ),
           ],
         ),
       ),
