@@ -36,7 +36,7 @@ class _ContactInfoState extends State<ContactInfo> {
 
   @override
   Widget build(BuildContext context) {
-    print(getByPerson());
+    // print(getByPerson());
     return Scaffold(
       //AppBar Area
       appBar: AppBar(
@@ -135,7 +135,8 @@ class _ContactInfoState extends State<ContactInfo> {
               children: [
                 Text(
                   person_ != null ? person_!.num : 'No Number',
-                  style: TextStyle(color: Colors.cyan, fontSize: 20),
+                  style: const TextStyle(
+                      color: Color.fromARGB(255, 88, 8, 88), fontSize: 22),
                 ),
               ],
             ),
@@ -217,28 +218,65 @@ class _ContactInfoState extends State<ContactInfo> {
             ),
             //Divider Line
             const DividerLine(),
-            const Spacer(flex: 20),
-            Column(
+            const Spacer(flex: 5),
+            //Mail Area
+            Row(
               children: [
-                Text(
-                  person_ != null ? "Mail: ${person_!.mail}" : '',
-                  style: const TextStyle(
-                      fontSize: 25,
-                      // fontFamily: "bold",
-                      fontWeight: FontWeight.w600),
+                const Spacer(
+                  flex: 5,
                 ),
-                const Spacer(flex: 10),
-                Text(
-                  person_ != null ? "Company:  ${person_!.company}" : '',
-                  style: const TextStyle(
-                      fontSize: 20,
-                      // fontFamily: "bold",
-                      fontWeight: FontWeight.w600),
+                const Column(
+                  children: [Icon(Icons.mail)],
+                ),
+                const Spacer(
+                  flex: 7,
+                ),
+                Column(
+                  children: [
+                    Text(
+                      person_ != null ? "Mail:   ${person_!.mail}" : '',
+                      style: const TextStyle(
+                          fontSize: 20,
+                          // fontFamily: "bold",
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
+                const Spacer(
+                  flex: 80,
                 ),
               ],
             ),
-
-            const Spacer(flex: 10),
+            const Spacer(flex: 5),
+            //Company Area
+            Row(
+              children: [
+                const Spacer(
+                  flex: 5,
+                ),
+                const Column(
+                  children: [Icon(Icons.business_sharp)],
+                ),
+                const Spacer(
+                  flex: 7,
+                ),
+                Column(
+                  children: [
+                    Text(
+                      person_ != null ? "Company:    ${person_!.company}" : '',
+                      style: const TextStyle(
+                          fontSize: 20,
+                          // fontFamily: "bold",
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
+                const Spacer(
+                  flex: 80,
+                ),
+              ],
+            ),
+            const Spacer(flex: 15),
           ],
         ),
       ),
