@@ -78,66 +78,68 @@ class _ContactAddState extends State<ContactAdd> {
           ),
         ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Padding(
-            padding: textFiledEdgeInsets,
-            child: Expanded(
-              child: TextField(
-                controller: tfpersonName,
-                decoration: const InputDecoration(
-                  hintText: "Name",
-                  hoverColor: Color.fromARGB(232, 17, 143, 202),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: textFiledEdgeInsets,
+              child: Expanded(
+                child: TextField(
+                  controller: tfpersonName,
+                  decoration: const InputDecoration(
+                    hintText: "Name",
+                    hoverColor: Color.fromARGB(232, 17, 143, 202),
+                  ),
                 ),
               ),
             ),
-          ),
-          Padding(
-            padding: textFiledEdgeInsets,
-            child: Expanded(
-              child: TextField(
-                controller: tfpersonLastname,
-                decoration: const InputDecoration(
-                  hintText: "Last Name",
-                  hoverColor: Color.fromARGB(232, 17, 143, 202),
+            Padding(
+              padding: textFiledEdgeInsets,
+              child: Expanded(
+                child: TextField(
+                  controller: tfpersonLastname,
+                  decoration: const InputDecoration(
+                    hintText: "Last Name",
+                    hoverColor: Color.fromARGB(232, 17, 143, 202),
+                  ),
                 ),
               ),
             ),
-          ),
-          Padding(
-            padding: textFiledEdgeInsets,
-            child: TextField(
-              controller: tfContactNum,
-              decoration: const InputDecoration(
-                hintText: "Phone (+90 0500 000 00 00) ",
-                hoverColor: Color.fromARGB(232, 3, 63, 91),
-              ),
-            ),
-          ),
-          Padding(
-            padding: textFiledEdgeInsets,
-            child: TextField(
-              controller: tfContactMail,
-              decoration: const InputDecoration(
-                hintText: "Email",
-                hoverColor: Color.fromARGB(232, 3, 63, 91),
-              ),
-            ),
-          ),
-          Padding(
-            padding: textFiledEdgeInsets,
-            child: Expanded(
+            Padding(
+              padding: textFiledEdgeInsets,
               child: TextField(
-                controller: tfContactCompany,
+                controller: tfContactNum,
                 decoration: const InputDecoration(
-                  hintText: "Company",
+                  hintText: "Phone (+90 0500 000 00 00) ",
                   hoverColor: Color.fromARGB(232, 3, 63, 91),
                 ),
               ),
             ),
-          ),
-        ],
+            Padding(
+              padding: textFiledEdgeInsets,
+              child: TextField(
+                controller: tfContactMail,
+                decoration: const InputDecoration(
+                  hintText: "Email",
+                  hoverColor: Color.fromARGB(232, 3, 63, 91),
+                ),
+              ),
+            ),
+            Padding(
+              padding: textFiledEdgeInsets,
+              child: Expanded(
+                child: TextField(
+                  controller: tfContactCompany,
+                  decoration: const InputDecoration(
+                    hintText: "Company",
+                    hoverColor: Color.fromARGB(232, 3, 63, 91),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
