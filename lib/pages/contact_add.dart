@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:masterapp/daoClasses/PersonDao.dart';
+import 'package:masterapp/pages/contact_info.dart';
 import 'package:masterapp/pages/homePages.dart';
 import 'package:masterapp/entity/person.dart';
 
@@ -25,8 +26,16 @@ class _ContactAddState extends State<ContactAdd> {
     print("Save edildi");
     await PersonDao().addPerson(tfpersonName.text, tfpersonLastname.text,
         tfContactNum.text, tfContactMail.text, tfContactCompany.text);
-    // Navigator.push(
-    //     context, MaterialPageRoute(builder: (context) => ContactInfo()));
+
+    int lastAddPerson = await PersonDao().getByIdPerson();
+
+    print("---!!!----LAst personId parametresi : $lastAddPerson");
+    await Future.delayed(const Duration(seconds: 1));
+    await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ContactInfo(personId: lastAddPerson)));
+    // Navigator.of(context).pop();
   }
 
   @override

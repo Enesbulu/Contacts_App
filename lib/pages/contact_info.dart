@@ -19,7 +19,20 @@ class _ContactInfoState extends State<ContactInfo> {
     Person getPerson =
         await PersonDao().getByIdPersonWithId(perId: widget.personId);
     print("getByPerson metodunun içerisi :: ${widget.personId}");
-    return getPerson;
+
+// getPerson değişkeninin Null bir değer döndürme olasılığını ele alarak hatayı önle.
+    getPerson = await getPerson;
+
+    if (getPerson == null) {
+      // getPerson değişkeni Null ise, boş bir dizi döndür.
+      getByPerson();
+      return Future.error("Person not found");
+    } else {
+      // getPerson değişkeni Null değilse, değeri döndür.
+      return getPerson;
+    }
+
+    // return getPerson;
   }
 
   @override

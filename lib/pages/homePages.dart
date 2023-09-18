@@ -151,6 +151,8 @@ class _HomeState extends State<Home> {
           if (snapshot.hasData) {
             var personList = snapshot.data;
             return ListView.builder(
+              physics:
+                  const AlwaysScrollableScrollPhysics(), //sayfanın scrollable özelliğini veriyor.
               itemCount: personList!.length,
               itemBuilder: (context, index) {
                 var person = personList[index];
@@ -233,6 +235,7 @@ class _HomeState extends State<Home> {
           }
         },
       ),
+
       //Add button
       floatingActionButton: FloatingActionButton(
         onPressed: () {
