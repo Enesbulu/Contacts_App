@@ -35,6 +35,20 @@ class _ContactInfoState extends State<ContactInfo> {
     // return getPerson;
   }
 
+  Future<void> deletePerson(int personId) async {
+    await PersonDao().personDelete(personId);
+    // Print the ID of the person to be deleted.
+    print("$personId silindi");
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+
+// Sınıfın durumunu yeniden oluştur.
+    setState(
+      () {
+        // viewAllContact   //kişi silinince kişiler listesinden silinmesi gerekli. gerekli kod yazılacak!
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -72,25 +86,41 @@ class _ContactInfoState extends State<ContactInfo> {
           IconButton(
             iconSize: 18,
             onPressed: () {
+              deletePerson(person_!.id);
               //SnacBar Widget Area - 1
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: const Text(
-                      "Are you sure you want the contact to be deleted? "),
-                  action: SnackBarAction(
-                    label: "Yes",
-                    onPressed: () {
-                      print("Delete tuluna basıldı");
-                      //SnacBar Widget Area - 2
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("Contact is deleted."),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              );
+              //   ScaffoldMessenger.of(context).showSnackBar(
+              //     SnackBar(
+              //       content: const Text(
+              //           "Are you sure you want the contact to be deleted? "),
+              //       action: SnackBarAction(
+              //         label: "Yes",
+              //         onPressed: () {
+              //           print("Delete tuluna basıldı");
+              //           //SnacBar Widget Area - 2
+              //           ScaffoldMessenger.of(context).showSnackBar(
+              //             const SnackBar(
+              //               content: Text("Contact is deleted."),
+              //               action: ,
+              //             ),
+              //           );
+              //         },
+              //       ),
+              //     ),
+              //   );
+
+              //ShowDialog Area
+              // showDialog(
+              //     context: context,
+              //     builder: (BuildContext context) {
+              //       return AlertDialog(
+              //         title: Text("Delete?"),
+              //         content: Text("Kişi silinsin mi?\nDelete the contact?"),
+              //         actions: [
+              //           FloatingActionButton(Text("Delete"),
+              //               onPressed: deletePerson(person_!.id))
+              //         ],
+              //       );
+              //     });
             },
             icon: const Icon(Icons.delete),
           ),

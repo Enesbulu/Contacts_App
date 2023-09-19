@@ -74,10 +74,12 @@ class _ContactAddState extends State<ContactAdd> {
               ),
               onPressed: () {
                 print("save basıldı");
-                save(
-                    tfpersonName.text, tfpersonLastname.text, tfContactNum.text,
-                    personMail: tfContactMail.text,
-                    personCompany: tfContactCompany.text);
+                if (tfpersonName.text != null || tfContactNum.text != null) {
+                  save(tfpersonName.text, tfpersonLastname.text,
+                      tfContactNum.text,
+                      personMail: tfContactMail.text,
+                      personCompany: tfContactCompany.text);
+                }
               },
               child: const Text(
                 'SAVE',
