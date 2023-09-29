@@ -3,6 +3,7 @@ import 'package:masterapp/daoClasses/PersonDao.dart';
 import 'package:masterapp/pages/contact_add.dart';
 import 'package:masterapp/pages/contact_info.dart';
 import 'package:masterapp/entity/person.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 // **Bu sınıf, uygulamanın ana sınıfıdır. Ana ekranı tanımlar.**
 class Home extends StatefulWidget {
@@ -58,6 +59,16 @@ class _HomeState extends State<Home> {
   Future<List<Person>> searchMake(String searchQuery) async {
     var personList = await PersonDao().searchPerson(searchQuery);
     return personList;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _requestPermissions();
+  }
+
+  void _requestPermissions() {
+    Permission.storage.request();
   }
 
 // **Bu method, bir kişiyi siler.**
