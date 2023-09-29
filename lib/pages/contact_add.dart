@@ -29,7 +29,7 @@ class _ContactAddState extends State<ContactAdd> {
 
     int lastAddPerson = await PersonDao().getByIdPerson();
 
-    print("---!!!----LAst personId parametresi : $lastAddPerson");
+    print("---!!!----Last personId parametresi : $lastAddPerson");
     await Future.delayed(const Duration(seconds: 1));
     await Navigator.push(
         context,

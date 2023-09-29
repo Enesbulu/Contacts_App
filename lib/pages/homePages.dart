@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:masterapp/daoClasses/PersonDao.dart';
 import 'package:masterapp/pages/contact_add.dart';
@@ -188,38 +190,45 @@ class _HomeState extends State<Home> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Column(
+                            CircleAvatar(
+                              backgroundImage: FileImage(
+                                File('images/img/1.jpg'),
+                              ),
+                            ),
+                            const Spacer(
+                              flex: 10,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    //Kisi isim
-                                    Text(
-                                      person.name,
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    //kişi soyisim
-                                    const Padding(padding: EdgeInsets.all(15)),
-                                    Text(
-                                      person.lastname,
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
+                                //Kisi isim
+                                Text(
+                                  person.name,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
                                 ),
-                                //kisi numarası
-                                Row(
-                                  children: [
-                                    Text(
-                                      person.num,
-                                      style: const TextStyle(fontSize: 12),
-                                    )
-                                  ],
-                                )
+                                //kişi soyisim
+                                const Padding(
+                                    padding: EdgeInsets.only(right: 7)),
+                                Text(
+                                  person.lastname,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ],
                             ),
+                            const Spacer(
+                              flex: 90,
+                            ),
+                            //kisi numarası
+                            // Row(
+                            //   children: [
+                            //     Text(
+                            //       person.num,
+                            //       style: const TextStyle(fontSize: 12),
+                            //     )
+                            //   ],
+                            // ),
                             //Kisi kard delete icon
                             IconButton(
                               onPressed: () {
