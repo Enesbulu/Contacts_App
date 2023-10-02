@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:masterapp/daoClasses/PersonDao.dart';
 import 'package:masterapp/pages/contact_info.dart';
@@ -20,9 +21,13 @@ class _ContactAddState extends State<ContactAdd> {
   var tfContactNum = TextEditingController();
   var tfContactMail = TextEditingController();
   var tfContactCompany = TextEditingController();
+  bool nullTest = false;
 
   Future<void> save(String personName, String personLastname, String personNum,
       {String personMail = "", String personCompany = ""}) async {
+    if (nullTest) {
+      print(nullTest);
+    }
     print("Save edildi");
     await PersonDao().addPerson(tfpersonName.text, tfpersonLastname.text,
         tfContactNum.text, tfContactMail.text, tfContactCompany.text);
@@ -98,9 +103,12 @@ class _ContactAddState extends State<ContactAdd> {
               child: Expanded(
                 child: TextField(
                   controller: tfpersonName,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintText: "Name",
-                    hoverColor: Color.fromARGB(232, 17, 143, 202),
+                    hoverColor: const Color.fromARGB(232, 17, 143, 202),
+                    errorText: tfpersonName.text.isEmpty
+                        ? "Please enter a name"
+                        : null,
                   ),
                 ),
               ),
@@ -122,7 +130,7 @@ class _ContactAddState extends State<ContactAdd> {
               child: TextField(
                 controller: tfContactNum,
                 decoration: const InputDecoration(
-                  hintText: "Phone (+90 0500 000 00 00) ",
+                  hintText: "Phone ( 0 500 000 00 00 ) ",
                   hoverColor: Color.fromARGB(232, 3, 63, 91),
                 ),
               ),
@@ -141,7 +149,8 @@ class _ContactAddState extends State<ContactAdd> {
               padding: textFiledEdgeInsets,
               child: Expanded(
                 child: TextField(
-                  controller: tfContactCompany,
+                  controller:
+                      tfContactCompany, //.text==null ? ErrorHint("Giriş yapmadınız"):,
                   decoration: const InputDecoration(
                     hintText: "Company",
                     hoverColor: Color.fromARGB(232, 3, 63, 91),
