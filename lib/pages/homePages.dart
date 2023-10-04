@@ -192,7 +192,7 @@ class _HomeState extends State<Home> {
                           children: [
                             CircleAvatar(
                               backgroundImage: FileImage(
-                                File('images/img/1.jpg'),
+                                Image.file(File("images1.jpg")),
                               ),
                             ),
                             const Spacer(
