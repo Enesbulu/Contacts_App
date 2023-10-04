@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:masterapp/daoClasses/PersonDao.dart';
 import 'package:masterapp/pages/contact_add.dart';
@@ -69,6 +67,7 @@ class _HomeState extends State<Home> {
     _requestPermissions();
   }
 
+//Db  bağlantı istek metodu
   void _requestPermissions() {
     Permission.storage.request();
   }
@@ -190,10 +189,8 @@ class _HomeState extends State<Home> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            CircleAvatar(
-                              backgroundImage: FileImage(
-                                Image.file(File("images1.jpg")),
-                              ),
+                            Image.asset(
+                              "images/1.png",
                             ),
                             const Spacer(
                               flex: 10,

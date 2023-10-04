@@ -26,20 +26,22 @@ class _ContactAddState extends State<ContactAdd> {
   Future<void> save(String personName, String personLastname, String personNum,
       {String personMail = "", String personCompany = ""}) async {
     if (nullTest) {
-      print(nullTest);
+      print("-------asdasdasd $nullTest");
     }
-    print("Save edildi");
-    await PersonDao().addPerson(tfpersonName.text, tfpersonLastname.text,
-        tfContactNum.text, tfContactMail.text, tfContactCompany.text);
+    if (personName != "" || personNum != "") {
+      print("Save edildi");
+      await PersonDao().addPerson(tfpersonName.text, tfpersonLastname.text,
+          tfContactNum.text, tfContactMail.text, tfContactCompany.text);
 
-    int lastAddPerson = await PersonDao().getByIdPerson();
+      int lastAddPerson = await PersonDao().getByIdPerson();
 
-    print("---!!!----Last personId parametresi : $lastAddPerson");
-    await Future.delayed(const Duration(seconds: 1));
-    await Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ContactInfo(personId: lastAddPerson)));
+      print("---!!!----Last personId parametresi : $lastAddPerson");
+      Navigator.pop(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ContactInfo(personId: lastAddPerson)));
+    } else {}
+
     // Navigator.of(context).pop();
   }
 
@@ -75,11 +77,11 @@ class _ContactAddState extends State<ContactAdd> {
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 101, 172, 200),
+                backgroundColor: const Color.fromARGB(255, 147, 242, 255),
               ),
               onPressed: () {
                 print("save basıldı");
-                if (tfpersonName.text != null || tfContactNum.text != null) {
+                if (tfpersonName.text != "" || tfContactNum.text != "") {
                   save(tfpersonName.text, tfpersonLastname.text,
                       tfContactNum.text,
                       personMail: tfContactMail.text,
@@ -88,7 +90,7 @@ class _ContactAddState extends State<ContactAdd> {
               },
               child: const Text(
                 'SAVE',
-                style: TextStyle(color: Color.fromARGB(232, 21, 68, 80)),
+                style: TextStyle(color: Color.fromARGB(255, 70, 44, 10)),
               ),
             ),
           ),
@@ -106,9 +108,8 @@ class _ContactAddState extends State<ContactAdd> {
                   decoration: InputDecoration(
                     hintText: "Name",
                     hoverColor: const Color.fromARGB(232, 17, 143, 202),
-                    errorText: tfpersonName.text.isEmpty
-                        ? "Please enter a name"
-                        : null,
+                    errorText:
+                        tfpersonName.text == "" ? "Please enter a name" : null,
                   ),
                 ),
               ),

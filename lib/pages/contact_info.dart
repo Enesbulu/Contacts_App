@@ -1,22 +1,27 @@
+// import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:masterapp/daoClasses/PersonDao.dart';
+import 'package:masterapp/entity/filePickerNavigate.dart';
 import 'package:masterapp/pages/contact_update.dart';
 import 'package:masterapp/pages/homePages.dart';
 import 'package:masterapp/entity/person.dart';
+import 'package:path/path.dart';
 
 class ContactInfo extends StatefulWidget {
   late int personId;
   ContactInfo({Key? key, required this.personId}) : super(key: key);
-
   @override
   State<ContactInfo> createState() => _ContactInfoState();
 }
 
 class _ContactInfoState extends State<ContactInfo> {
   Person? person_;
+  // late String? imagePath;
+  // late List<String>? imagePaths;
+  // late FilePickerResult? filePickerResults;
 
   Future<Person> getByPerson() async {
-    Person getPerson =
+    Person? getPerson =
         await PersonDao().getByIdPersonWithId(perId: widget.personId);
     print("getByPerson metodunun içerisi :: ${widget.personId}");
 
@@ -35,11 +40,40 @@ class _ContactInfoState extends State<ContactInfo> {
     // return getPerson;
   }
 
+// //Resim yükleme işlemi için metod
+//   void updateItems(FilePickerNavigateModel model) {
+//     setState(() {
+//       imagePath = model.imagePath;
+//       imagePaths = model.imagePaths;
+//       filePickerResults = model.filePickerResults;
+//     });
+//   }
+
+  // Widget _fileUpload() {
+  //   return Column(
+  //     mainAxisAlignment: MainAxisAlignment.start,
+  //     children: [
+  //       SizedBox(
+  //         height: MediaQuery.of(context).size.height * 0.09,
+  //         child: FileUploadButton(
+  //           onResult: (result) {
+  //             updateItems(result);
+  //           },
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
+
+// //resmi almak için metod
+//   late final void Function(FilePickerNavigateModel result) onResult;
+
   Future<void> deletePerson(int personId) async {
     await PersonDao().personDelete(personId);
     // Print the ID of the person to be deleted.
     print("$personId silindi");
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+    Navigator.push(context as BuildContext,
+        MaterialPageRoute(builder: (context) => Home()));
 
 // Sınıfın durumunu yeniden oluştur.
     setState(
@@ -152,8 +186,25 @@ class _ContactInfoState extends State<ContactInfo> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Image.asset(
-                  "images/img/1.jpg",
-                )
+                  "images/1.png",
+                ),
+                // InkWell(
+                //   onTap: () {
+                //     SliverList(
+                //       delegate: SliverChildListDelegate(
+                //         [
+                //           _fileUpload(),
+                //           (imagePaths?.isNotEmpty ?? false) ||
+                //                   (filePickerResults != null)
+                //               ? emptyAreaSizedBox(context)
+                //               : const SizedBox(),
+                //         ],
+                //       ),
+                //     );
+                //   },
+                //   child: Image.asset("images/1.png"),
+                //   borderRadius: const BorderRadius.all(Radius.circular(60.0)),
+                // ),
               ],
             ),
             const Spacer(
@@ -326,6 +377,8 @@ class _ContactInfoState extends State<ContactInfo> {
     );
   }
 }
+
+// FileUploadButton({required Null Function(dynamic result) onResult}) {}
 
 class DividerLine extends StatelessWidget {
   const DividerLine({super.key});
