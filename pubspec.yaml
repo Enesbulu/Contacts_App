@@ -32,9 +32,10 @@ dependencies:
     sdk: flutter
   path: ^1.8.3
   sqflite: ^2.3.0
-  image_picker: ^1.0.4
-  image_cropper: ^1.0.0
-  CircleAvatar: ^1.0.0
+  # image_picker: ^1.0.4  #kullanıcının galerisinden veya kameradan fotoğraf seçmesine olanak tanır
+  # image_cropper: ^1.0.0 #kullanıcının seçtiği fotoğrafı kırpmanıza olanak tanır.
+  # # CircleAvatar: ^1.0.0
+  # # firebase_storage: ^11.2.8
   # file_picker: ^5.5.0
   # photo_manager: ^2.7.1
 

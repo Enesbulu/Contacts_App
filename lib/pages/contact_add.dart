@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:masterapp/daoClasses/PersonDao.dart';
 import 'package:masterapp/pages/contact_info.dart';
@@ -23,20 +22,34 @@ class _ContactAddState extends State<ContactAdd> {
   var tfContactCompany = TextEditingController();
   bool nullTest = false;
 
-  Future<void> save(String personName, String personLastname, String personNum,
-      {String personMail = "", String personCompany = ""}) async {
+  Future<void> save(
+    String personName,
+    String personLastname,
+    String personNum, {
+    String personMail = "",
+    String personCompany = "",
+  }) async {
     if (nullTest) {
       print("-------asdasdasd $nullTest");
     }
     if (personName != "" || personNum != "") {
       print("Save edildi");
-      await PersonDao().addPerson(tfpersonName.text, tfpersonLastname.text,
-          tfContactNum.text, tfContactMail.text, tfContactCompany.text);
+      await PersonDao().addPerson(
+        tfpersonName.text,
+        tfpersonLastname.text,
+        tfContactNum.text,
+        tfContactMail.text,
+        tfContactCompany.text,
+      );
 
       int lastAddPerson = await PersonDao().getByIdPerson();
 
       print("---!!!----Last personId parametresi : $lastAddPerson");
-      Navigator.pop(
+      // Navigator.pop(
+      //     context,
+      //     MaterialPageRoute(
+      //         builder: (context) => ContactInfo(personId: lastAddPerson)));
+      Navigator.pushReplacement(
           context,
           MaterialPageRoute(
               builder: (context) => ContactInfo(personId: lastAddPerson)));

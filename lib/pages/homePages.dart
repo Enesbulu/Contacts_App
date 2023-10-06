@@ -8,7 +8,7 @@ import 'package:permission_handler/permission_handler.dart';
 // **Bu sınıf, uygulamanın ana sınıfıdır. Ana ekranı tanımlar.**
 class Home extends StatefulWidget {
   // **The constructor of the class.**
-  // Home({Key? key}) : super(key: key);
+  Home({Key? key}) : super(key: key);
 
   // **Bu method, sınıfın durumunu oluşturur.**
   @override

@@ -10,19 +10,28 @@ class PersonDao {
 
     print("//\\'allPerson' çalışıyor");
 
-    return List.generate(maps.length, (p) {
-      var line = maps[p];
-      return Person(
+    return List.generate(
+      maps.length,
+      (p) {
+        var line = maps[p];
+        return Person(
           id: line["person_id"],
           name: line["person_name"],
           lastname: line["person_lastName"],
-          num: line["person_num"]);
-    });
+          num: line["person_num"],
+        );
+      },
+    );
   }
 
 //Kişi ekleme
-  Future<void> addPerson(String personName, String personLastname,
-      String personNum, String? personMail, String? personCompany) async {
+  Future<void> addPerson(
+    String personName,
+    String personLastname,
+    String personNum,
+    String? personMail,
+    String? personCompany,
+  ) async {
     var db = await DbConnectionHelper.dbAccess();
     // var personInfo = Map<String, dynamic>();
     Map<String, dynamic> personInfo = {};
@@ -32,7 +41,6 @@ class PersonDao {
     personInfo["person_num"] = personNum;
     personInfo["person_mail"] = personMail;
     personInfo["person_company"] = personCompany;
-
     await db.insert("persons", personInfo);
   }
 
@@ -58,7 +66,9 @@ class PersonDao {
 //Kişi güncelleme
   Future<void> personUpdate(
       int personId, String personName, String personLastname, String personNum,
-      {String personMail = "", String personCompany = " "}) async {
+      {String personMail = "",
+      String personCompany = " ",
+      String personImage = "images/1.png"}) async {
     var db = await DbConnectionHelper.dbAccess();
     Map<String, dynamic> personInfo = {};
     personInfo["person_name"] = personName;
@@ -66,7 +76,6 @@ class PersonDao {
     personInfo["person_num"] = personNum;
     personInfo["person_mail"] = personMail;
     personInfo["person_company"] = personCompany;
-
     await db.update("persons", personInfo,
         where: "person_id=?", whereArgs: [personId]);
   }
@@ -96,26 +105,6 @@ class PersonDao {
 
 ///////////
 
-//Eklenen son kişiyi çekme
-  Future<List<Person>> getBySingleId() async {
-    var db = await DbConnectionHelper.dbAccess();
-    List<Map<String, dynamic>> map =
-        (await db.rawQuery("SELECT * FROM persons ORDER BY 1 DESC limit 1;"));
-
-    return List.generate(map.length, (p) {
-      var line = map[p];
-
-      return Person(
-        id: line["person_id"],
-        name: line["person_name"],
-        lastname: line["person_lastName"],
-        num: line["person_num"],
-        mail: line["person_mail"],
-        company: line["person_company"],
-      );
-    });
-  }
-
 //Son eklene kişinin id yi döndürür.
   Future<int> getByIdPerson() async {
     var db = await DbConnectionHelper.dbAccess();
@@ -123,22 +112,5 @@ class PersonDao {
         "SELECT person_id FROM persons ORDER BY person_id DESC LIMIT 1;"));
 
     return map[0]['person_id'];
-  }
-
-//
-  Future<Person> getByContact() async {
-    var db = await DbConnectionHelper.dbAccess();
-    List<Map<String, dynamic>> map =
-        (await db.rawQuery("SELECT * FROM persons ORDER BY 1 DESC limit 1;"));
-
-    var line = map[0];
-    return Person(
-      id: line["person_id"],
-      name: line["person_name"],
-      lastname: line["person_lastName"],
-      num: line["person_num"],
-      mail: line["person_mail"],
-      company: line["person_company"],
-    );
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:masterapp/daoClasses/PersonDao.dart';
 import 'package:masterapp/entity/person.dart';
+import 'package:masterapp/pages/contact_info.dart';
+// import 'package:masterapp/pages/ProfilPage.dart';
 import 'package:masterapp/pages/homePages.dart';
 // import 'package:masterapp_/person.dart';
 
@@ -38,7 +40,7 @@ class _ContactUpdateState extends State<ContactUpdate> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => Home(),
+        builder: (context) => ContactInfo(personId: widget.personId),
       ),
     );
   }
@@ -83,7 +85,7 @@ class _ContactUpdateState extends State<ContactUpdate> {
           onPressed: () {
             print("Back buton basıldı");
             print(context);
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => Home()),
             );
@@ -113,7 +115,7 @@ class _ContactUpdateState extends State<ContactUpdate> {
           ),
         ],
       ),
-      body: SingleChildScrollView(        
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
