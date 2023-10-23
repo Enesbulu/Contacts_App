@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:masterapp/daoClasses/PersonDao.dart';
 import 'package:masterapp/entity/person.dart';
 import 'package:masterapp/pages/contact_info.dart';
-// import 'package:masterapp/pages/ProfilPage.dart';
 import 'package:masterapp/pages/homePages.dart';
-// import 'package:masterapp_/person.dart';
 
 class ContactUpdate extends StatefulWidget {
   // Person person;
@@ -32,8 +30,7 @@ class _ContactUpdateState extends State<ContactUpdate> {
       String tfContactMail,
       String tfContactCompany) async {
     print("$tfContactName - $tfContactLastName kayit edildi");
-    // PersonDao().personUpdate(widget.personId, tfContactName, tfContactLastName,
-    //     tfContactNum, tfContactMail, tfContactCompany);
+
     PersonDao().personUpdate(
         widget.personId, tfContactName, tfContactLastName, tfContactNum,
         personCompany: tfContactCompany, personMail: tfContactMail);
