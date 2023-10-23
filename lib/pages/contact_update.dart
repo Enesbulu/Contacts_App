@@ -68,11 +68,9 @@ class _ContactUpdateState extends State<ContactUpdate> {
 
   @override
   Widget build(BuildContext context) {
-    EdgeInsets textFiledEdgeInsets = const EdgeInsets.only(
-        left: 20,
-        right: 20,
-        bottom:
-            20); //textField nesnelerinin paddin değerlerini standartlaştırmak için oluşturulmuş değişken.
+    EdgeInsets textFiledEdgeInsets = const EdgeInsets.fromLTRB(
+        Checkbox.width, 10, Checkbox.width, Checkbox.width);
+    //const EdgeInsets.only(left: 20,right: 20,bottom:20); //textField nesnelerinin paddin değerlerini standartlaştırmak için oluşturulmuş değişken.
     return Scaffold(
       appBar: AppBar(
         title: const Text("Update Contact"),
@@ -84,7 +82,10 @@ class _ContactUpdateState extends State<ContactUpdate> {
             print(context);
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => Home()),
+              MaterialPageRoute(
+                  builder: (context) => ContactInfo(
+                        personId: widget.personId,
+                      )),
             );
           },
         ),
@@ -113,72 +114,81 @@ class _ContactUpdateState extends State<ContactUpdate> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            //Textfield-Name
-            Padding(
-              padding: textFiledEdgeInsets,
-              child: Expanded(
-                child: TextField(
-                  controller: tfContactName,
-                  decoration: const InputDecoration(
-                    // hintText: "Name",
-                    hoverColor: Color.fromARGB(232, 17, 143, 202),
+        child: SizedBox(
+          height: 400.0,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              //Textfield-Name
+              Padding(
+                padding: textFiledEdgeInsets,
+              ),
+              Expanded(
+                child: Padding(
+                  padding: textFiledEdgeInsets,
+                  child: TextField(
+                    controller: tfContactName,
+                    decoration: const InputDecoration(
+                      // hintText: "Name",
+                      hoverColor: Color.fromARGB(232, 17, 143, 202),
+                    ),
                   ),
                 ),
               ),
-            ),
-            //Textfield-LastName
-            Padding(
-              padding: textFiledEdgeInsets,
-              child: TextField(
-                controller: tfContactLastName,
-                decoration: const InputDecoration(
-                  hintText: "Last Name",
-                  hoverColor: Color.fromARGB(232, 3, 63, 91),
-                ),
-              ),
-            ),
-            //Textfield-Number
-            Padding(
-              padding: textFiledEdgeInsets,
-              child: TextField(
-                controller: tfContactNum,
-                decoration: const InputDecoration(
-                  hintText: "Phone (+90 0500 000 00 00) ",
-                  hoverColor: Color.fromARGB(232, 3, 63, 91),
-                ),
-              ),
-            ),
-            //Textfield-Email
-            Padding(
-              padding: textFiledEdgeInsets,
-              child: TextField(
-                controller: tfContactMail,
-                decoration: const InputDecoration(
-                  hintText: "Email",
-                  hoverColor: Color.fromARGB(232, 3, 63, 91),
-                ),
-              ),
-            ),
-            //Textfield-Company
-            Padding(
-              padding: textFiledEdgeInsets,
-              child: Expanded(
+              //Textfield-LastName
+              Padding(
+                padding: textFiledEdgeInsets,
                 child: TextField(
-                  controller: tfContactCompany,
+                  controller: tfContactLastName,
                   decoration: const InputDecoration(
-                    hintText: "Company",
+                    hintText: "Last Name",
                     hoverColor: Color.fromARGB(232, 3, 63, 91),
                   ),
                 ),
               ),
-            ),
-            // Spacer(
-            //   flex: 10,
-            // )
-          ],
+              //Textfield-Number
+              Padding(
+                padding: textFiledEdgeInsets,
+                child: TextField(
+                  controller: tfContactNum,
+                  decoration: const InputDecoration(
+                    hintText: "Phone (+90 0500 000 00 00) ",
+                    hoverColor: Color.fromARGB(232, 3, 63, 91),
+                  ),
+                ),
+              ),
+              //Textfield-Email
+              Padding(
+                padding: textFiledEdgeInsets,
+                child: TextField(
+                  controller: tfContactMail,
+                  decoration: const InputDecoration(
+                    hintText: "Email",
+                    hoverColor: Color.fromARGB(232, 3, 63, 91),
+                  ),
+                ),
+              ),
+              //Textfield-Company
+              Padding(
+                padding: textFiledEdgeInsets,
+              ),
+              Expanded(
+                child: Padding(
+                  padding: textFiledEdgeInsets,
+                  child: TextField(
+                    controller: tfContactCompany,
+                    decoration: const InputDecoration(
+                      hintText: "Company",
+                      hoverColor: Color.fromARGB(232, 3, 63, 91),
+                    ),
+                  ),
+                ),
+              ),
+              // Spacer(
+              //   flex: 10,
+              // )
+            ],
+          ),
         ),
       ),
     );

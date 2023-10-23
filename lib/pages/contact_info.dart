@@ -128,9 +128,10 @@ class _ContactInfoState extends State<ContactInfo> {
           //Edit Icon Area
           IconButton(
               iconSize: 18,
-              onPressed: () {
+              onPressed: () async {
                 print("Edit buton basıldı");
                 print(context);
+                await Future.delayed(const Duration(milliseconds: 300));
                 Navigator.push(
                   context,
                   MaterialPageRoute(

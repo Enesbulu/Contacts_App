@@ -254,17 +254,20 @@ class _HomeState extends State<Home> {
       ),
 
       //Add button
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          print("Add buton basıldı");
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ContactAdd()),
-          );
-        },
-        tooltip: "Add Contact",
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton: Builder(builder: (BuildContext context) {
+        return FloatingActionButton(
+          onPressed: () async {
+            print("Add buton basıldı");
+            await Future.delayed(const Duration(milliseconds: 500));
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ContactAdd()),
+            );
+          },
+          tooltip: "Add Contact",
+          child: const Icon(Icons.add),
+        );
+      }),
     );
   }
 }

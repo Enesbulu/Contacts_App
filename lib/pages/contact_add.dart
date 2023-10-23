@@ -68,8 +68,9 @@ class _ContactAddState extends State<ContactAdd> {
 
   @override
   Widget build(BuildContext context) {
-    EdgeInsets textFiledEdgeInsets =
-        const EdgeInsets.only(left: 20, right: 20, bottom: 20);
+    EdgeInsets textFiledEdgeInsets = const EdgeInsets.fromLTRB(
+        Checkbox.width, 10, Checkbox.width, Checkbox.width);
+    // const EdgeInsets.only(left: 30, right: 20, bottom: 2.0, top: .0);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add Contact"),
@@ -110,69 +111,87 @@ class _ContactAddState extends State<ContactAdd> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Padding(
-              padding: textFiledEdgeInsets,
-              child: Expanded(
-                child: TextField(
-                  controller: tfpersonName,
-                  decoration: InputDecoration(
-                    hintText: "Name",
-                    hoverColor: const Color.fromARGB(232, 17, 143, 202),
-                    errorText:
-                        tfpersonName.text == "" ? "Please enter a name" : null,
+        child: SizedBox(
+          height: 400.0,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: textFiledEdgeInsets,
+              ),
+              Expanded(
+                child: Padding(
+                  padding: textFiledEdgeInsets,
+                  // padding: textFiledEdgeInsets,
+                  child: TextField(
+                    controller: tfpersonName,
+                    decoration: InputDecoration(
+                      hintText: "Name",
+                      hoverColor: const Color.fromARGB(232, 17, 143, 202),
+                      errorText: tfpersonName.text == ""
+                          ? "Please enter a name"
+                          : null,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: textFiledEdgeInsets,
-              child: Expanded(
-                child: TextField(
-                  controller: tfpersonLastname,
-                  decoration: const InputDecoration(
-                    hintText: "Last Name",
-                    hoverColor: Color.fromARGB(232, 17, 143, 202),
+              // Padding(
+              //   padding: textFiledEdgeInsets,
+              // ),
+              Expanded(
+                child: Padding(
+                  padding: textFiledEdgeInsets,
+                  child: TextField(
+                    controller: tfpersonLastname,
+                    decoration: const InputDecoration(
+                      hintText: "Last Name",
+                      hoverColor: Color.fromARGB(232, 17, 143, 202),
+                    ),
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: textFiledEdgeInsets,
-              child: TextField(
-                controller: tfContactNum,
-                decoration: const InputDecoration(
-                  hintText: "Phone ( 0 500 000 00 00 ) ",
-                  hoverColor: Color.fromARGB(232, 3, 63, 91),
-                ),
-              ),
-            ),
-            Padding(
-              padding: textFiledEdgeInsets,
-              child: TextField(
-                controller: tfContactMail,
-                decoration: const InputDecoration(
-                  hintText: "Email",
-                  hoverColor: Color.fromARGB(232, 3, 63, 91),
-                ),
-              ),
-            ),
-            Padding(
-              padding: textFiledEdgeInsets,
-              child: Expanded(
-                child: TextField(
-                  controller:
-                      tfContactCompany, //.text==null ? ErrorHint("Giriş yapmadınız"):,
-                  decoration: const InputDecoration(
-                    hintText: "Company",
-                    hoverColor: Color.fromARGB(232, 3, 63, 91),
+              Expanded(
+                child: Padding(
+                  padding: textFiledEdgeInsets,
+                  child: TextField(
+                    controller: tfContactNum,
+                    decoration: const InputDecoration(
+                      hintText: "Phone ( 0 500 000 00 00 ) ",
+                      hoverColor: Color.fromARGB(232, 3, 63, 91),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+              Expanded(
+                child: Padding(
+                  padding: textFiledEdgeInsets,
+                  child: TextField(
+                    controller: tfContactMail,
+                    decoration: const InputDecoration(
+                      hintText: "Email",
+                      hoverColor: Color.fromARGB(232, 3, 63, 91),
+                    ),
+                  ),
+                ),
+              ),
+              // Padding(
+              //   padding: textFiledEdgeInsets,
+              // ),
+              Expanded(
+                child: Padding(
+                  padding: textFiledEdgeInsets,
+                  child: TextField(
+                    controller:
+                        tfContactCompany, //.text==null ? ErrorHint("Giriş yapmadınız"):,
+                    decoration: const InputDecoration(
+                      hintText: "Company",
+                      hoverColor: Color.fromARGB(232, 3, 63, 91),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
